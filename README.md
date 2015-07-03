@@ -7,7 +7,7 @@ TableViewControllerとCoredataを使用した簡単なアプリのサンプル�
 - UnwindSegueによる画面遷移
 
 # 解説
-## Coredataの追加、削除、参照
+## Coredataとは
  Coredataはリレーショナルデータベースとオブジェクトの間を上手に取り持ってくれるO/Rマッピングツール。
  オブジェクト指向でエンティティを作成し、メインプログラムからオブジェクトとして読み書きするロジックを書けば、勝手に最適化してリレーショナルデータベース（SQLite）とやりとりしてくれる。
  他にもModelControllerとして動作するNSFetchResultController等を搭載し、特にUITableViewControllerでは欠かせない存在になっている。
@@ -17,7 +17,8 @@ TableViewControllerとCoredataを使用した簡単なアプリのサンプル�
 
 [Coredataプログラミングガイド](https://developer.apple.com/jp/documentation/CoreData.pdf)
 
-そして、当サンプルソースを解読すれば理解が進むと思う。
+そして、当サンプルソースを解読すれば理解が進むと思う。  
+不明点はissueをあげてもらえると助かります。
 
 ## その他
 NSFetchedResultControllerクラスのobjectAtIndexPathメソッドは、通常だと特定Entityへのダウンキャストができない。
