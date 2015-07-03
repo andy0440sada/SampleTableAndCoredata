@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
-class SampleTableViewController: UITableViewController {
+class SampleTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
 
     @IBAction func addSampleData(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("showDetail", sender: self)
@@ -21,91 +24,77 @@ class SampleTableViewController: UITableViewController {
         
         var viewController = segue.sourceViewController as! SampleDetailViewController
         let text = viewController.textField.text
+        
+        self.addEntity(text)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.fetchedResultController = self.getFetchedResultController()
+        self.fetchedResultController.delegate = self
+        self.fetchedResultController.performFetch(nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+        let numberOfSections = fetchedResultController.sections?.count
+        return numberOfSections!
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        let numberOfRowsInsection = fetchedResultController.sections?[section].numberOfObjects
+        return numberOfRowsInsection!
+    }
+    
+    func addEntity(addText: String) {
+        // AppDelegateのシングルトンインスタンスからManagedObjectContextを取得
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        // ManagedObjectContextからEntityDescriptionのインスタンスを取得
+        let entityDescription = NSEntityDescription.entityForName("Entity", inManagedObjectContext: managedObjectContext!)
+        // Entityインスタンスを初期化（第一引数の外部名がentityになっているが指定するのはNSEntityDescription）
+        let entity = Entity(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        // もしくは以下の記述でもOK
+        // let entity = NSEntityDescription.insertNewObjectForEntityForName("Entity", inManagedObjectContext: context) as! Entity
+        // Entityのインスタンス生成時に必ずオブジェクトをinsertするのであればこちらの方がシンプル
+        
+        entity.text = addText
+        managedObjectContext?.save(nil)
+    }
+    
+    // FetchedResultControllerインスタンスの生成と初期化
+    func getFetchedResultController() -> NSFetchedResultsController {
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Entity")
+        let sortDescriptor = NSSortDescriptor(key: "text", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultController
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        
+        // NSFetchedResultControllerからindexPathを指定してオブジェクトを取得する
+        // EntityクラスにダウンCastするためには以下の通りにCoreDataの設定とNSManagedObjectを修正する必要あり
+        // 1.CoreDataの対象Entityのプロパティについて、「Class」属性をEntity名に変更
+        // 2.対象EntityのNSManagedObjectに@Objc(Entity)を追加
+        // http://stackoverflow.com/questions/26613971/swift-coredata-warning-unable-to-load-class-named
+        
+        let entity = fetchedResultController.objectAtIndexPath(indexPath) as! Entity
+        cell.textLabel?.text = entity.text
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - NSFetchedResultsControllerDelegate
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

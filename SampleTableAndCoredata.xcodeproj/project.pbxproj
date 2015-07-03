@@ -15,6 +15,7 @@
 		85A6470C1B41BBB800E0B533 /* SampleTableAndCoredataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A6470B1B41BBB800E0B533 /* SampleTableAndCoredataTests.swift */; };
 		85A647191B41BDAA00E0B533 /* SampleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A647181B41BDAA00E0B533 /* SampleTableViewController.swift */; };
 		85A6471B1B41BF2500E0B533 /* SampleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A6471A1B41BF2500E0B533 /* SampleDetailViewController.swift */; };
+		85DDE9B91B474264006A05E7 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DDE9B81B474264006A05E7 /* Entity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		85A6470B1B41BBB800E0B533 /* SampleTableAndCoredataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableAndCoredataTests.swift; sourceTree = "<group>"; };
 		85A647181B41BDAA00E0B533 /* SampleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SampleTableViewController.swift; path = ViewController/SampleTableViewController.swift; sourceTree = "<group>"; };
 		85A6471A1B41BF2500E0B533 /* SampleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SampleDetailViewController.swift; path = ViewController/SampleDetailViewController.swift; sourceTree = "<group>"; };
+		85DDE9B81B474264006A05E7 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entity.swift; path = Entity/Entity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				85A646F91B41BBB700E0B533 /* Main.storyboard */,
 				85A646FC1B41BBB700E0B533 /* Images.xcassets */,
 				85A646FE1B41BBB700E0B533 /* LaunchScreen.xib */,
+				85DDE9B81B474264006A05E7 /* Entity.swift */,
 				85A646F41B41BBB700E0B533 /* SampleTableAndCoredata.xcdatamodeld */,
 				85A646F01B41BBB700E0B533 /* Supporting Files */,
 				85A647181B41BDAA00E0B533 /* SampleTableViewController.swift */,
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85A646F31B41BBB700E0B533 /* AppDelegate.swift in Sources */,
+				85DDE9B91B474264006A05E7 /* Entity.swift in Sources */,
 				85A646F61B41BBB700E0B533 /* SampleTableAndCoredata.xcdatamodeld in Sources */,
 				85A6471B1B41BF2500E0B533 /* SampleDetailViewController.swift in Sources */,
 				85A647191B41BDAA00E0B533 /* SampleTableViewController.swift in Sources */,
@@ -417,6 +421,7 @@
 				85A647111B41BBB800E0B533 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85A647121B41BBB800E0B533 /* Build configuration list for PBXNativeTarget "SampleTableAndCoredataTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +430,7 @@
 				85A647141B41BBB800E0B533 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
