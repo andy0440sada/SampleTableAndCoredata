@@ -26,5 +26,5 @@ NSFetchedResultControllerクラスのobjectAtIndexPathメソッドは、通常�
 1. CoreDataの対象Entityのプロパティについて、「Class」属性をEntity名に変更
 1. 対象EntityのNSManagedObjectに@Objc(Entity)を追加
 
-詳細はstackOverflow参照
+詳細はstackOverflow参照  
 http://stackoverflow.com/questions/26613971/swift-coredata-warning-unable-to-load-class-named
