@@ -1,7 +1,7 @@
 # 概要
 TableViewControllerとCoredataを使用した簡単なアプリのサンプルです。
 
-# サンプルに含まれている機能
+## サンプルに含まれている機能
 - Coredataの追加、削除、参照
 - NSFetchResultControllerによるTableViewの更新
 - UnwindSegueによる画面遷移
