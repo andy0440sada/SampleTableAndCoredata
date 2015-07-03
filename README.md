@@ -22,7 +22,9 @@ TableViewControllerとCoredataを使用した簡単なアプリのサンプル�
 ## その他
 NSFetchedResultControllerクラスのobjectAtIndexPathメソッドは、通常だと特定Entityへのダウンキャストができない。
 以下の手順でCoreDataの設定とNSManagedObjectを修正するとダウンキャストが出来るようになる。
+
 1. CoreDataの対象Entityのプロパティについて、「Class」属性をEntity名に変更
 1. 対象EntityのNSManagedObjectに@Objc(Entity)を追加
 
+詳細はstackOverflow参照
 http://stackoverflow.com/questions/26613971/swift-coredata-warning-unable-to-load-class-named
